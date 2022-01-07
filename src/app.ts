@@ -1,7 +1,13 @@
-import Express from "express";
+import { authRouter } from "./routes/auth/index";
+import Express, { urlencoded, json } from "express";
 import "reflect-metadata";
 
 export const app = Express();
+
+app.use(urlencoded());
+app.use(json());
+
+app.use("/auth", authRouter);
 
 const port = 3000;
 

@@ -11,7 +11,8 @@ export class DatabaseConnection {
 
   static getConnection = async () => {
     if (!this.connection) {
-      return this.initConnection();
+      this.connection = await this.initConnection();
+      return this.connection;
     }
 
     return this.connection;
