@@ -1,13 +1,14 @@
+import { User } from "./../entity/user";
 import { Request, Response } from "express";
 
 export type MiddlewareTypeFunc = (
   req: Request,
   res: Response,
-  next: () => void
+  next: (...args: unknown[]) => void
 ) => void;
 
 declare module "express" {
   interface Request {
-    user?: string; // TODO: change to user object saved in token
+    user?: User;
   }
 }

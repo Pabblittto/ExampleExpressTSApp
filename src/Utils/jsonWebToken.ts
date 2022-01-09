@@ -20,3 +20,19 @@ export const createToken = (user: User): string => {
   //@ts-expect-error
   return jwt.sign(payload, process.env.SECRET_KEY);
 };
+
+/**
+ * Decodes JWT and returns it's payload. If token argument contains some additional strings like 'Bearier', it will be trimmed from the text.
+ * @param token
+ */
+export const decodeJWTFromHTTPHeader = <Payload extends unknown>(
+  token: string
+): Payload => {
+  const tokenParts = token.split(" ");
+
+  const extractedToken = tokenParts[tokenParts.length - 1];
+
+  const decodedToken = jwt.decode(extractedToken);
+
+  return decodedToken as Payload;
+};

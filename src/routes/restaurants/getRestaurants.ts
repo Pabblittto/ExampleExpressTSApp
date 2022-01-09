@@ -1,5 +1,15 @@
-import { restaurantRouter } from "./index";
+import { RouteHandler } from "./../basicTypes";
 
-restaurantRouter.get("/", (req, res) => {
-  res.send();
-});
+export type GetRestaurantsReq = null;
+export type GetRestaurantsRes = {};
+
+export const getRestaurants: RouteHandler<
+  GetRestaurantsReq,
+  GetRestaurantsRes
+> = async (req, res, next) => {
+  try {
+    // TODO:Get all restaurants from database
+  } catch (err) {
+    next(err);
+  }
+};

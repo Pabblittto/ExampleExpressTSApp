@@ -1,5 +1,5 @@
 import { RouteHandler } from "./../basicTypes";
-import { createToken } from "./../../Utils/createToken";
+import { createToken } from "../../Utils/jsonWebToken";
 import { UserRepository } from "./../../data/UserRepository/userRepository";
 import { DatabaseConnection } from "./../../data/connection";
 
@@ -16,9 +16,7 @@ export const createUserHandler: RouteHandler<
   RegisterUserReq,
   RegisterUserRes
 > = async (req, res, next) => {
-  //TODO: need to place try catch statement around
   try {
-    console.log(req.body);
     const { email, password } = req.body;
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
@@ -29,7 +27,7 @@ export const createUserHandler: RouteHandler<
 
     if (emailUsed) throw new Error("TODO need to add custom error object");
 
-    //Create user
+    // Create user
     const user = new User();
     user.email = email;
     user.hashedPassword = hashedPassword;
