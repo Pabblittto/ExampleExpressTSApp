@@ -2,6 +2,7 @@
   "type": "sqlite",
   "database": "./mydb.db",
   "name": "default",
+  "synchronize": false,
   "keepConnectionAlive": true,
   "cli": {
     "migrationsDir": "src/migration",

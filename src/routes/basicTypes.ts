@@ -1,7 +1,15 @@
 import { Request, Response } from "express";
 
-export type RouteHandler<ReqB = unknown, ResB = unknown> = (
-  req: Request<ReqB, any, ReqB>,
-  res: Response<ResB>,
+interface ParamsDictionary {
+  [key: string]: string;
+}
+
+export type RouteHandler<
+  ReqBody = unknown,
+  ResBody = unknown,
+  ReqParams = ParamsDictionary
+> = (
+  req: Request<ReqParams, any, ReqBody>,
+  res: Response<ResBody>,
   next: (...args: unknown[]) => void
 ) => Promise<void>;

@@ -14,9 +14,19 @@ export const JWTAuthMiddleware: MiddlewareTypeFunc = async (req, res, next) => {
 
     const userData = decodeJWTFromHTTPHeader<TokenPayload>(token);
 
-    const user = await User.findOneOrFail(userData.id);
+    const user = await User.findOneOrFail({
+      where: { id: userData.id },
+      join: {
+        alias: "user",
+        leftJoinAndSelect: {
+          group1: "user.managedGroups",
+          group2: "user.groups",
+        },
+      },
+    });
 
     req.user = user;
+    next();
   } catch (err) {
     next(err);
   }
