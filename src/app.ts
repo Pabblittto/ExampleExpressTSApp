@@ -1,3 +1,4 @@
+import { userDataRouter } from "./routes/userData/index";
 import { DatabaseConnection } from "./data/connection";
 import { groupRouter } from "./routes/groups/index";
 import { restaurantRouter } from "./routes/restaurants/index";
@@ -13,6 +14,7 @@ app.use(json());
 app.use("/auth", authRouter);
 app.use("/restaurant", restaurantRouter);
 app.use("/group", groupRouter);
+app.use("/user", userDataRouter);
 
 const port = 3000;
 

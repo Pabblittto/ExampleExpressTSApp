@@ -19,7 +19,6 @@ export const createGroup: RouteHandler<CreateGroupReq, CreateGroupRes> = async (
     const newGroup = new Group();
     newGroup.name = req.body.groupName;
     newGroup.admins = [user];
-    newGroup.users = [user];
     const createdGroup = await newGroup.save();
 
     res.status(201).send({

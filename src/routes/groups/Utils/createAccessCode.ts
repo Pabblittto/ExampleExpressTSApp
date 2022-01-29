@@ -6,7 +6,11 @@ export type CreateAccessCodeRes = {
 };
 
 export const createAccessCode = (): CreateAccessCodeRes => {
-  const code = random.generate({ length: 5, charset: "alphanumeric" });
+  const code = random.generate({
+    length: 5,
+    charset: "alphanumeric",
+    capitalization: "uppercase",
+  });
 
   return {
     timestamp: Date.now(),
